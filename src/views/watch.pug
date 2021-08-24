@@ -1,0 +1,8 @@
+extends base.pug
+
+block content
+    h4 #{video.views} #{video.views === 1 ? "view" : "views"}
+    h4 #{video.like} #{video.like === 1 ? "like" : "likes"}
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+
+    

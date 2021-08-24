@@ -1,0 +1,17 @@
+extends base.pug
+include mixins/video
+
+block content
+    nav
+        ul
+            li 
+                a(href="/videos/upload") Upload video
+    h1 You can see the new updated videos!!!
+    
+    each info in videos
+        +video(info)
+    else    
+        span Sorry nothing found
+
+    input(placeholder="What's your name")
+    button send
