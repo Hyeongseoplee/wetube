@@ -6,7 +6,7 @@
     "url": "git+https://github.com/vennylee/wetube.git"
   },
   "scripts": {
-    "executeServer": "nodemon --exec babel-node src/server.js"
+    "executeServer": "nodemon --exec babel-node src/init.js"
   },
   "license": "MIT",
   "bugs": {
@@ -15,6 +15,7 @@
   "homepage": "https://github.com/vennylee/wetube#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^6.0.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

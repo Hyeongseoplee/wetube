@@ -1,57 +1,35 @@
-const fakeUser = {
-    userName : "chloe",
-    loggedIn : true
-};
+import Video from "../models/Video";
 
-const videos = [{
-    title : "video #1",
-    views : 1,
-    rating : 3.5,
-    like : 10,
-    dislike : 2,
-    comments : 100,
-    createdAt : "2 minnutes ago",
-    id : 1
-},{
-    title : "video #2",
-    views : 58,
-    rating : 3.5,
-    like : 1,
-    dislike : 2,
-    comments : 100,
-    createdAt : "2 minnutes ago",
-    id : 2
-},{
-    title : "video #3",
-    views : 100,
-    rating : 3.5,
-    like : 200,
-    dislike : 2,
-    comments : 100,
-    createdAt : "2 minnutes ago",
-    id : 3
-}]
+const videos = [];
 
-export const showLatestVideos = (req, res) => {
-    return res.render("home", { pageTitle : "Home", fakeUser : fakeUser, videos : videos})
+/*
+Video.find({}, (error, videos) => {
+    console.log("second");
+    return res.render("home", { pageTitle : "Home", videos : []})
+})
+*/
+
+export const home = async (req, res) => {
+    try{const videos = await Video.find({});
+    return res.render("home", { pageTitle : "Home", videos})
+}catch(error){
+    return res.render("server-error", {error})
+}
 };
 
 export const watch = (req, res) => {
     const { id } = req.params;
-    const video = videos[id-1];
-    return res.render("watch", { pageTitle : `Watching ${video.title}`, video});
+    return res.render("watch", { pageTitle : `Watchin`});
 }
 
 export const getEdit = (req, res) => {
     const { id } = req.params;
-    const video = videos[id-1];
-    return res.render("edit", { pageTitle : `Editing ${video.title}`})
+    return res.render("edit", { pageTitle : `Editing`})
 } 
 
 export const postEdit = (req, res) => {
     const { id } = req.params;
     const { title } = req.body;
-    videos[id -1].title = title;
     return res.redirect(`/videos/${id}`)
 }
 
@@ -67,16 +45,5 @@ export const getUpload = (req, res) => {
 
 export const postUpload = (req, res) => {
     const { title } = req.body;
-    const newVideo = {
-        title : title,
-        views : 0,
-        rating : 0,
-        like : 0,
-        dislike : 0,
-        comments : 0,
-        createdAt : "just now",
-        id : videos.length + 1
-    }
-    videos.push(newVideo);
     return res.redirect(`/`);
 }
